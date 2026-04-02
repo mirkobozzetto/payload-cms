@@ -5,6 +5,8 @@ import { adminOrEditor } from '../access/adminOrEditor'
 import { publishedOnly } from '../access/publishedOnly'
 import { autoSlug } from '../hooks/auto-slug'
 import { auditAfterChange, auditAfterDelete } from '../hooks/audit-log'
+import { publishWorkflow } from '../hooks/publish-workflow'
+import { publishNotification } from '../hooks/publish-notification'
 
 // Posts: blog articles with rich text, relationships, versioning, and drafts
 // `versions.drafts` enables the draft/published workflow — documents start as
@@ -33,7 +35,8 @@ export const Posts: CollectionConfig = {
     maxPerDoc: 25,
   },
   hooks: {
-    afterChange: [auditAfterChange],
+    beforeChange: [publishWorkflow],
+    afterChange: [auditAfterChange, publishNotification],
     afterDelete: [auditAfterDelete],
   },
   fields: [
