@@ -3,6 +3,7 @@ import { anyone } from '../access/anyone'
 import { adminOnly } from '../access/adminOnly'
 import { adminOrEditor } from '../access/adminOrEditor'
 import { autoSlug } from '../hooks/auto-slug'
+import { auditAfterChange, auditAfterDelete } from '../hooks/audit-log'
 
 // Categories for organizing blog posts
 // `localized: true` on label allows different category names per language
@@ -18,6 +19,10 @@ export const Categories: CollectionConfig = {
     create: adminOrEditor,
     update: adminOnly,
     delete: adminOnly,
+  },
+  hooks: {
+    afterChange: [auditAfterChange],
+    afterDelete: [auditAfterDelete],
   },
   fields: [
     {

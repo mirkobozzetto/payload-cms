@@ -4,6 +4,7 @@ import { adminOnly } from '../access/adminOnly'
 import { adminOrEditor } from '../access/adminOrEditor'
 import { publishedOnly } from '../access/publishedOnly'
 import { autoSlug } from '../hooks/auto-slug'
+import { auditAfterChange, auditAfterDelete } from '../hooks/audit-log'
 import { Hero } from '../blocks/Hero'
 import { Content } from '../blocks/Content'
 import { HowItWorks } from '../blocks/HowItWorks'
@@ -37,6 +38,10 @@ export const Pages: CollectionConfig = {
       autosave: true,
     },
     maxPerDoc: 25,
+  },
+  hooks: {
+    afterChange: [auditAfterChange],
+    afterDelete: [auditAfterDelete],
   },
   fields: [
     {
