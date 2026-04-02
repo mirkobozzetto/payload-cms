@@ -9,6 +9,8 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Categories } from './collections/Categories'
 import { Tags } from './collections/Tags'
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import { Posts } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,7 +22,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Categories, Tags],
+  collections: [Users, Media, Categories, Tags, Posts],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -46,5 +48,17 @@ export default buildConfig({
     fallback: true,
   },
   sharp,
-  plugins: [],
+  plugins: [
+    // SEO plugin injects a `meta` field group (title, description, image)
+    // on each specified collection. These fields are automatically localized
+    // when the collection uses localization.
+    // `generateTitle` and `generateDescription` provide default values
+    // from the document's own fields, overridable by the editor
+    seoPlugin({
+      collections: ['posts'],
+      uploadsCollection: 'media',
+      generateTitle: ({ doc }) => `${doc.title} — Payload CMS`,
+      generateDescription: ({ doc }) => doc.excerpt || '',
+    }),
+  ],
 })
