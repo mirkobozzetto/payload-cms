@@ -20,7 +20,9 @@
   "dependencies": {
     "@payloadcms/db-postgres": "latest",
     "@payloadcms/next": "latest",
+    "@payloadcms/plugin-form-builder": "^3.81.0",
     "@payloadcms/plugin-nested-docs": "^3.81.0",
+    "@payloadcms/plugin-search": "^3.81.0",
     "@payloadcms/plugin-seo": "^3.81.0",
     "@payloadcms/richtext-lexical": "latest",
     "@payloadcms/ui": "latest",

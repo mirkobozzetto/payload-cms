@@ -12,14 +12,11 @@ export const publishNotification: CollectionAfterChangeHook = async ({
 }) => {
   if (operation !== 'update') return doc
 
-  const wasPublished =
-    previousDoc?.status !== 'published' && doc.status === 'published'
+  const wasPublished = previousDoc?.status !== 'published' && doc.status === 'published'
 
   if (wasPublished) {
     const user = req.user?.email || 'unknown'
-    console.log(
-      `[PUBLISH] "${doc.title}" published by ${user} at ${new Date().toISOString()}`,
-    )
+    console.log(`[PUBLISH] "${doc.title}" published by ${user} at ${new Date().toISOString()}`)
   }
 
   return doc

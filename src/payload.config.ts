@@ -71,8 +71,7 @@ export default buildConfig({
     nestedDocsPlugin({
       collections: ['pages'],
       generateLabel: (_, doc) => doc.title as string,
-      generateURL: (docs) =>
-        docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
+      generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
     }),
     // Form Builder creates two collections: 'forms' (schemas) and 'form-submissions'
     // Admins define form fields (text, email, textarea, select, checkbox) in the admin panel
