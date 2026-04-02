@@ -42,6 +42,9 @@ next-env.d.ts
 
 /media
 
+# Docs internes
+/docs/
+
 # Playwright
 node_modules/
 /test-results/
