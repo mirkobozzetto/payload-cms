@@ -5,6 +5,5 @@ import type { Access } from 'payload'
 // This avoids a database lookup on every request
 export const adminOnly: Access = ({ req: { user } }) => {
   if (!user) return false
-  const roles = user.roles as string[] | undefined
-  return roles?.includes('admin') ?? false
+  return user.roles?.includes('admin') ?? false
 }

@@ -6,7 +6,6 @@ import type { Access } from 'payload'
 // than fetching all docs and filtering in JS
 export const adminOrSelf: Access = ({ req: { user } }) => {
   if (!user) return false
-  const roles = user.roles as string[] | undefined
-  if (roles?.includes('admin')) return true
+  if (user.roles?.includes('admin')) return true
   return { id: { equals: user.id } }
 }

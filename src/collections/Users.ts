@@ -40,8 +40,7 @@ export const Users: CollectionConfig = {
       access: {
         // Only admins can change roles — prevents privilege escalation
         update: ({ req: { user } }) => {
-          const roles = user?.roles as string[] | undefined
-          return roles?.includes('admin') ?? false
+          return user?.roles?.includes('admin') ?? false
         },
       },
     },

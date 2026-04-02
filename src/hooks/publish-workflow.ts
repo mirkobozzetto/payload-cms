@@ -26,9 +26,9 @@ export const publishWorkflow: CollectionBeforeChangeHook = async ({
   if (!data.status || !originalDoc?.status) return data
   if (data.status === originalDoc.status) return data
 
-  const from = originalDoc.status as string
-  const to = data.status as string
-  const roles = (req.user?.roles as string[] | undefined) ?? []
+  const from = originalDoc.status
+  const to = data.status
+  const roles = req.user?.roles ?? []
 
   const allowed = VALID_TRANSITIONS[from]
   if (!allowed?.includes(to)) {
