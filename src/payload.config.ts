@@ -11,6 +11,8 @@ import { Categories } from './collections/Categories'
 import { Tags } from './collections/Tags'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
+import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
+import { searchPlugin } from '@payloadcms/plugin-search'
 import { Posts } from './collections/Posts'
 import { Pages } from './collections/Pages'
 
@@ -70,6 +72,31 @@ export default buildConfig({
       generateLabel: (_, doc) => doc.title as string,
       generateURL: (docs) =>
         docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
+    }),
+    // Form Builder creates two collections: 'forms' (schemas) and 'form-submissions'
+    // Admins define form fields (text, email, textarea, select, checkbox) in the admin panel
+    // The frontend renders these dynamically and submits to the Payload API
+    // No hardcoded forms — editors can create contact, newsletter, feedback forms on their own
+    formBuilderPlugin({
+      fields: {
+        text: true,
+        email: true,
+        textarea: true,
+        select: true,
+        checkbox: true,
+      },
+    }),
+    // Search plugin creates a 'search-results' collection with flattened,
+    // index-optimized copies of documents from the specified collections
+    // It syncs automatically on create/update/delete via hooks
+    // The frontend queries 'search-results' instead of individual collections
+    // for fast, unified search across content types
+    searchPlugin({
+      collections: ['posts', 'pages'],
+      defaultPriorities: {
+        posts: 10,
+        pages: 20,
+      },
     }),
   ],
 })
