@@ -10,7 +10,9 @@ import { Media } from './collections/Media'
 import { Categories } from './collections/Categories'
 import { Tags } from './collections/Tags'
 import { seoPlugin } from '@payloadcms/plugin-seo'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { Posts } from './collections/Posts'
+import { Pages } from './collections/Pages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Categories, Tags, Posts],
+  collections: [Users, Media, Categories, Tags, Posts, Pages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -55,10 +57,19 @@ export default buildConfig({
     // `generateTitle` and `generateDescription` provide default values
     // from the document's own fields, overridable by the editor
     seoPlugin({
-      collections: ['posts'],
+      collections: ['posts', 'pages'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => `${doc.title} — Payload CMS`,
       generateDescription: ({ doc }) => doc.excerpt || '',
+    }),
+    // Nested Docs adds a `parent` relationship field and a `breadcrumbs` array
+    // to the specified collections. This enables hierarchical URL structures
+    // like /legal/cgv. The breadcrumbs are auto-generated from the parent chain.
+    nestedDocsPlugin({
+      collections: ['pages'],
+      generateLabel: (_, doc) => doc.title as string,
+      generateURL: (docs) =>
+        docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
     }),
   ],
 })
