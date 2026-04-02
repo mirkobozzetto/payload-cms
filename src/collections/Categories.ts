@@ -10,6 +10,10 @@ import { auditAfterChange, auditAfterDelete } from '../hooks/audit-log'
 // Slug is NOT localized — URLs stay consistent across languages
 export const Categories: CollectionConfig = {
   slug: 'categories',
+  labels: {
+    singular: { fr: 'Catégorie', en: 'Category', nl: 'Categorie' },
+    plural: { fr: 'Catégories', en: 'Categories', nl: 'Categorieën' },
+  },
   admin: {
     useAsTitle: 'label',
     defaultColumns: ['label', 'slug'],

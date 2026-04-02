@@ -7,6 +7,10 @@ import { adminOnly } from '../access/adminOnly'
 // Admin can view for debugging and accountability
 export const AuditLogs: CollectionConfig = {
   slug: 'audit-logs',
+  labels: {
+    singular: { fr: "Entrée d'audit", en: 'Audit Log', nl: 'Auditlog' },
+    plural: { fr: "Journal d'audit", en: 'Audit Logs', nl: 'Auditlogboek' },
+  },
   admin: {
     useAsTitle: 'collection',
     defaultColumns: ['collection', 'action', 'user', 'createdAt'],

@@ -7,6 +7,10 @@ import { adminOrSelf } from '../access/adminOrSelf'
 // Roles are stored in the JWT via `saveToJWT: true` to avoid DB lookups
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: {
+    singular: { fr: 'Utilisateur', en: 'User', nl: 'Gebruiker' },
+    plural: { fr: 'Utilisateurs', en: 'Users', nl: 'Gebruikers' },
+  },
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'roles', 'createdAt'],
@@ -27,10 +31,11 @@ export const Users: CollectionConfig = {
       name: 'roles',
       type: 'select',
       hasMany: true,
+      label: { fr: 'Rôles', en: 'Roles', nl: 'Rollen' },
       options: [
-        { label: 'Admin', value: 'admin' },
-        { label: 'Editor', value: 'editor' },
-        { label: 'User', value: 'user' },
+        { label: { fr: 'Administrateur', en: 'Admin', nl: 'Beheerder' }, value: 'admin' },
+        { label: { fr: 'Éditeur', en: 'Editor', nl: 'Redacteur' }, value: 'editor' },
+        { label: { fr: 'Utilisateur', en: 'User', nl: 'Gebruiker' }, value: 'user' },
       ],
       defaultValue: ['user'],
       required: true,

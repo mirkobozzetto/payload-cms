@@ -9,6 +9,10 @@ import { auditAfterChange, auditAfterDelete } from '../hooks/audit-log'
 // A post can have many tags (hasMany relationship defined in Posts)
 export const Tags: CollectionConfig = {
   slug: 'tags',
+  labels: {
+    singular: { fr: 'Tag', en: 'Tag', nl: 'Tag' },
+    plural: { fr: 'Tags', en: 'Tags', nl: 'Tags' },
+  },
   admin: {
     useAsTitle: 'label',
     defaultColumns: ['label', 'slug'],

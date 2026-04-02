@@ -22,6 +22,10 @@ import { ImageGallery } from '../blocks/ImageGallery'
 // for URL hierarchy (e.g., /legal/cgv, /legal/cgu)
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  labels: {
+    singular: { fr: 'Page', en: 'Page', nl: 'Pagina' },
+    plural: { fr: 'Pages', en: 'Pages', nl: "Pagina's" },
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
@@ -77,9 +81,9 @@ export const Pages: CollectionConfig = {
       type: 'select',
       defaultValue: 'draft',
       options: [
-        { label: 'Draft', value: 'draft' },
-        { label: 'Review', value: 'review' },
-        { label: 'Published', value: 'published' },
+        { label: { fr: 'Brouillon', en: 'Draft', nl: 'Concept' }, value: 'draft' },
+        { label: { fr: 'En révision', en: 'Review', nl: 'In revisie' }, value: 'review' },
+        { label: { fr: 'Publié', en: 'Published', nl: 'Gepubliceerd' }, value: 'published' },
       ],
       admin: {
         position: 'sidebar',

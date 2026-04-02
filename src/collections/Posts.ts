@@ -13,6 +13,10 @@ import { publishNotification } from '../hooks/publish-notification'
 // `schedulePublish` allows scheduling a future publish date.
 export const Posts: CollectionConfig = {
   slug: 'posts',
+  labels: {
+    singular: { fr: 'Article', en: 'Post', nl: 'Artikel' },
+    plural: { fr: 'Articles', en: 'Posts', nl: 'Artikelen' },
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'status', 'publishedAt', 'updatedAt'],
@@ -109,9 +113,9 @@ export const Posts: CollectionConfig = {
       type: 'select',
       defaultValue: 'draft',
       options: [
-        { label: 'Draft', value: 'draft' },
-        { label: 'Review', value: 'review' },
-        { label: 'Published', value: 'published' },
+        { label: { fr: 'Brouillon', en: 'Draft', nl: 'Concept' }, value: 'draft' },
+        { label: { fr: 'En révision', en: 'Review', nl: 'In revisie' }, value: 'review' },
+        { label: { fr: 'Publié', en: 'Published', nl: 'Gepubliceerd' }, value: 'published' },
       ],
       admin: {
         position: 'sidebar',
