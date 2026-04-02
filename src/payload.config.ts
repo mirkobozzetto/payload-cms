@@ -1,5 +1,8 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { fr } from '@payloadcms/translations/languages/fr'
+import { en } from '@payloadcms/translations/languages/en'
+import { nl } from '@payloadcms/translations/languages/nl'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -29,6 +32,13 @@ export default buildConfig({
   },
   collections: [Users, Media, Categories, Tags, Posts, Pages, AuditLogs],
   editor: lexicalEditor(),
+  // i18n: traduit l'interface admin (boutons, menus, messages d'erreur)
+  // Distinct de `localization` qui gère les traductions du contenu
+  // L'utilisateur peut changer la langue dans ses préférences de compte
+  i18n: {
+    supportedLanguages: { fr, en, nl },
+    fallbackLanguage: 'fr',
+  },
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
