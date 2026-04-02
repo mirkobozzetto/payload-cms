@@ -1,5 +1,4 @@
 import type { CollectionConfig } from 'payload'
-import { anyone } from '../access/anyone'
 import { adminOnly } from '../access/adminOnly'
 import { adminOrEditor } from '../access/adminOrEditor'
 import { publishedOnly } from '../access/publishedOnly'
